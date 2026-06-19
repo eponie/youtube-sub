@@ -6,17 +6,24 @@ YouTube 影片一鍵下載音訊 → 語音轉字幕 → 字幕翻譯。
 
 ---
 
-## 安裝
+## Requirements
+
+- Apple Silicon Mac (M series)
+- Python 3.12+
+- [uv](https://github.com/astral-sh/uv)
+- ffmpeg: `brew install ffmpeg`
+
+## Install
 
 ```bash
-cd ~/Documents/vibe/youtube-sub
-uv sync
+git clone https://github.com/eponie/youtube-sub
+cd youtube-sub && bash install.sh
 ```
 
-第一次使用建議先預熱模型（下載約 1.5GB，之後 cache 在 `~/.cache/huggingface/hub/`）：
+First run: download the Whisper model (~1.5GB, cached at `~/.cache/huggingface/hub/`):
 
 ```bash
-uv run youtube-sub warmup
+youtube-sub warmup
 ```
 
 ---
@@ -28,16 +35,16 @@ uv run youtube-sub warmup
 export YOUTUBE_SUB_WORK_DIR=~/Movies/subtitles
 
 # 日文影片 → 日文字幕 → 繁體中文字幕（預設值）
-uv run youtube-sub run "https://www.youtube.com/watch?v=VIDEO_ID"
+youtube-sub run "https://www.youtube.com/watch?v=VIDEO_ID"
 
 # 英文影片 → 英文字幕（不翻譯）
-uv run youtube-sub run "https://..." --lang en --to en
+youtube-sub run "https://..." --lang en --to en
 
 # 臨時指定不同的工作目錄
-uv run youtube-sub run "https://..." --work-dir ~/Desktop
+youtube-sub run "https://..." --work-dir ~/Desktop
 
 # 指定翻譯引擎為 Claude
-uv run youtube-sub run "https://..." --translator claude
+youtube-sub run "https://..." --translator claude
 ```
 
 > **貼上 URL 的技巧：** 若 zsh 把 URL 裡的 `?` 變成 `\?`，程式會自動修正，不用手動處理。

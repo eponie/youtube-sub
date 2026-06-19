@@ -2,7 +2,7 @@
 set -e
 
 echo "📦 安裝 youtube-sub CLI 工具..."
-uv tool install git+https://github.com/enid/youtube-sub
+uv tool install .
 
 echo "🤖 安裝 Claude Code Skill..."
 mkdir -p ~/.claude/skills/youtube-sub
